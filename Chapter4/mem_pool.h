@@ -54,6 +54,8 @@ namespace Common {
         if (UNLIKELY(next_free_index_ == store_.size())) { // hardware branch predictor should almost always predict this to be false any ways.
           next_free_index_ = 0;
         }
+        // this will happen when the free index goes all the way in the memory pool and comes back to the same initial_free_index.
+        // this means it hasn't found any space in the whole memory pool.
         if (UNLIKELY(initial_free_index == next_free_index_)) {
           ASSERT(initial_free_index != next_free_index_, "Memory Pool out of space.");
         }
