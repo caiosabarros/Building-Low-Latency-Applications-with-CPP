@@ -21,6 +21,7 @@ namespace Common {
       ASSERT(obj_block->is_free_, "Expected free ObjectBlock at index:" + std::to_string(next_free_index_));
       T *ret = &(obj_block->object_);
       ret = new(ret) T(args...); // placement new.
+      // caiosa - since obj_block is a pointer, the below is the same as (*obj_block).is_free
       obj_block->is_free_ = false;
 
       updateNextFreeIndex();
